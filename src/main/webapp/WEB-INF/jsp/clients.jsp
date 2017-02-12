@@ -13,6 +13,8 @@
 			<tr>
 				<td>${client.id}</td>
 				<td>${client.name}</td>
+				<td>${client.car.name}</td>
+				<td><a href="/garage/garage/clients/edit/${client.id}">Edit</a></td>
 			</tr>
 		</c:forEach>
 	</table>
