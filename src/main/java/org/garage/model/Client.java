@@ -1,12 +1,6 @@
 package org.garage.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-
-
 import javax.persistence.*;
-import javax.persistence.Id;
-import javax.persistence.Table;
 
 @Entity
 @Table(name = "clients")
@@ -18,18 +12,14 @@ public class Client {
 	private int id;
 	@Column(name = "nameclients")
 	private String name;
+	@Column(name="phoneclients")
+	private String phone;
+	/*
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "idclients")
+	private List<Car> car;
+	*/	
 
-	@ManyToOne
-	@JoinColumn(name = "idcars")
-	private Car car;
-	
-	public Car getCar() {
-	    return this.car;
-	}
-	public void setCars(Car car) {
-	    this.car = car;
-	}
-	
 	public int getId() {
 		return id;
 	}
@@ -41,5 +31,11 @@ public class Client {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 }

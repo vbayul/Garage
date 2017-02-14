@@ -19,17 +19,6 @@ public class HibernateMapping {
 		return clients;
 	}
 	
-	public List<Car> getCars(){
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		session.beginTransaction();
-		
-		@SuppressWarnings("unchecked")
-		List<Car> cars = session.createQuery("from Car").list();
-		
-		session.getTransaction().commit();
-		return cars;
-	}
-	
 	public Client getClient(int idClient){
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
@@ -41,17 +30,6 @@ public class HibernateMapping {
 		return client;
 	}
 	
-	public Car getCar(int idCar){
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		session.beginTransaction();
-		
-		Car car = (Car) session.createQuery("from Car where id = :idCar")
-				.setParameter("idCar", idCar).uniqueResult();
-		session.getTransaction().commit();
-		
-		return car;
-	}
-
 	public void updateClient(Client client){
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
@@ -61,4 +39,28 @@ public class HibernateMapping {
 		session.getTransaction().commit();
 	}
 	
+	public List<Car> getCars(int idClient){
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		
+		@SuppressWarnings("unchecked")
+		List<Car> cars = session.createQuery("from Car where idclients = :idClient")
+								.setParameter("idClient", idClient).list();
+		
+		session.getTransaction().commit();
+		
+		return cars;
+	}
+
+	public void deleteCarFromClient(int idCar){
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		
+		Car car = (Car) session.createQuery("from Car where idcars = :idCar")
+							   .setParameter("idCar", idCar).uniqueResult();
+		car.setIdclients(0);
+		session.update(car);		
+		
+		session.getTransaction().commit();
+	}
 }

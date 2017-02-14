@@ -12,7 +12,29 @@ public class Car {
 	private int id;
 	@Column(name="namecars")
 	private String name;
+	@Column(name="idclients")
+	private int idclients;
+	@Column(name="yearcars")
+	private int yearcars;
 	
+	public int getIdclients() {
+		return idclients;
+	}
+	public void setIdclients(int idclients) {
+		this.idclients = idclients;
+	}
+	public int getYearcars() {
+		return yearcars;
+	}
+	public void setYearcars(int yearcars) {
+		this.yearcars = yearcars;
+	}
+	
+	public Car() {
+	}
+	public Car(int id) {
+		this.id = id;
+	}
 	public int getId() {
 		return id;
 	}

@@ -9,22 +9,16 @@
 <title>Insert title here</title>
 </head>
 <body>
-    <form:form method="POST" modelAttribute="client" action="http://localhost:8080/garage/garage/clients/update/">
-		<form:input type="hidden" path="id" id="id"/>
+    <form:form method="POST" modelAttribute="client" action="/garage/garage/clients/update/">
+		<form:input type="hidden" path="id" id="client.id"/>
         <table>
             <tr>
                 <td><label for="name">Name: </label> </td>
-                <td><form:input path="name" id="name"/></td>
+                <td><form:input path="name" id="client.name"/></td>
             </tr>
             <tr>
-            	<td><label for="client.car.id">Car: </label> </td>
-            	<td>
-					<select name="client.car" id="client.car">
-					    <c:forEach var="item" items="${cars}">
-					        <option value="${item.id}" ${item.id == client.car.id ? 'selected="selected"' : ''}>${item.name}</option>
-					    </c:forEach>
-					</select>
-				</td>
+                <td><label for="phone">Phone: </label> </td>
+                <td><form:input path="phone" id="client.phone"/></td>
             </tr>
             <tr>
                 <td colspan="3">
@@ -33,5 +27,15 @@
             </tr>
         </table>
     </form:form>
+    <table>
+        <c:forEach var="item" items="${cars}" >
+        	<tr>
+        		<td>${item.id}</td>
+        		<td>${item.name}</td>
+        		<td>${item.yearcars}</td>
+        		<td><a href="/garage/garage/clients/delete/${client.id}/${item.id}">Delete</a></td>
+        	</tr>
+		</c:forEach>
+    </table>
 </body>
 </html>

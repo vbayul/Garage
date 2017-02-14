@@ -19,24 +19,38 @@ public class ClientsController {
 	
 	@RequestMapping( value = "/clients")
 	public String getClients(ModelMap model){
-		
 		List<Client> clients = services.getClients();
 		model.addAttribute("clients", clients);
 		return "clients";
 	}
 	
-	@RequestMapping(value = "/clients/edit/{idClient}")
-	public String editClient(@PathVariable int idClient, ModelMap model)
-	{
+	@RequestMapping(value = "/clients/{idClient}")
+	public String updateClient(@PathVariable int idClient, ModelMap model){
 		Client client = services.getClient(idClient);
-		List<Car> cars = services.getCars();
+		List<Car> cars = services.getCars(idClient);
 		model.addAttribute("cars", cars);
 		model.addAttribute("client", client);
 		return "edit";
 	}
 	
+	@RequestMapping(value = "/clients/edit/{idClient}")
+	public String addCarToClient(@PathVariable("idClient") int idClient, ModelMap model){
+		Client client = services.getClient(idClient);
+		List<Car> cars = services.getCars(idClient);
+		model.addAttribute("cars", cars);
+		model.addAttribute("client", client);
+		return "edit";
+	}
+	
+	@RequestMapping(value = "/clients/delete/{idClient}/{idCar}", method=RequestMethod.GET)
+	public String deleteCarFromClient(@PathVariable("idClient") int idClient, @PathVariable("idCar") int idCar, ModelMap model){
+		services.deleteCarFromClient(idCar);
+		return "redirect:/garage/clients/"+idClient;
+	}
+	
 	@RequestMapping( value = "/clients/update/", method = RequestMethod.POST)
 	public String addClient(@ModelAttribute("client") Client client, ModelMap model){
+
 		services.updateClient(client);
 		return "redirect:/garage/clients";
 	}
