@@ -23,35 +23,59 @@ public class ClientsController {
 		model.addAttribute("clients", clients);
 		return "clients";
 	}
-	
-	@RequestMapping(value = "/clients/{idClient}")
-	public String updateClient(@PathVariable int idClient, ModelMap model){
-		Client client = services.getClient(idClient);
-		List<Car> cars = services.getCars(idClient);
-		model.addAttribute("cars", cars);
+
+	@RequestMapping(value = "/clients/client/new")
+	public String newCarToClient(ModelMap model){
+		Client client = new Client();
+		model.addAttribute("operation", "add");
 		model.addAttribute("client", client);
-		return "edit";
+		return "client";
 	}
 	
-	@RequestMapping(value = "/clients/edit/{idClient}")
+	@RequestMapping(value = "/clients/client/add", method=RequestMethod.POST)
+	public String addCarToClient(@ModelAttribute("client") Client client, ModelMap model){
+		int idClient = services.addClient(client);
+		return "redirect:/garage/clients/client/"+idClient;
+	}
+	
+	
+	@RequestMapping(value = "/clients/client/{idClient}")
 	public String addCarToClient(@PathVariable("idClient") int idClient, ModelMap model){
 		Client client = services.getClient(idClient);
-		List<Car> cars = services.getCars(idClient);
-		model.addAttribute("cars", cars);
+		List<Car> cars = services.getCarsByClient(idClient);
+		
+		model.addAttribute("operation", "update");
+		model.addAttribute("clientcars", cars);
 		model.addAttribute("client", client);
-		return "edit";
+		return "client";
+	}
+
+	@RequestMapping(value = "/clients/client/{idClient}/add/{idCar}")
+	public String addCarToClient(@PathVariable("idClient") int idClient, @PathVariable("idCar") int idCar, ModelMap model){
+		services.addCarToClient(idCar, idClient);
+		return "redirect:/garage/clients/client/"+idClient;
 	}
 	
-	@RequestMapping(value = "/clients/delete/{idClient}/{idCar}", method=RequestMethod.GET)
+	@RequestMapping(value = "/clients/client/{idClient}/add")
+	public String addCar(@PathVariable("idClient") int idClient, ModelMap model){
+		List<Car> cars = services.getCarsFree();
+		
+		model.addAttribute("cars", cars);
+		model.addAttribute("client", idClient);
+		
+		return "addcars";
+	}
+	
+	@RequestMapping(value = "/clients/client/{idClient}/delete/{idCar}")
 	public String deleteCarFromClient(@PathVariable("idClient") int idClient, @PathVariable("idCar") int idCar, ModelMap model){
 		services.deleteCarFromClient(idCar);
-		return "redirect:/garage/clients/"+idClient;
+		return "redirect:/garage/clients/client/"+idClient;
 	}
 	
-	@RequestMapping( value = "/clients/update/", method = RequestMethod.POST)
+	@RequestMapping( value = "/clients/client/update/", method = RequestMethod.POST)
 	public String addClient(@ModelAttribute("client") Client client, ModelMap model){
-
+		System.out.println("--------------------"+client.getName());
 		services.updateClient(client);
-		return "redirect:/garage/clients";
+		return "redirect:/garage/clients/client/"+client.getId();
 	}
 }
