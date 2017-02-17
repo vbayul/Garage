@@ -6,7 +6,7 @@ import org.garage.model.Car;
 import org.garage.model.Client;
 import org.hibernate.Session;
 
-public class HibernateMapping {
+public class HibernateMappingClients {
 	
 	public List<Client> getClients(){
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();

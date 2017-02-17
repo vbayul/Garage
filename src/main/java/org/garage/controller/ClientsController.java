@@ -2,7 +2,7 @@ package org.garage.controller;
 
 import java.util.List;
 
-import org.garage.jpa.HibernateMapping;
+import org.garage.jpa.HibernateMappingClients;
 import org.garage.model.Car;
 import org.garage.model.Client;
 import org.springframework.stereotype.Controller;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class ClientsController {
 
-	private HibernateMapping services = new HibernateMapping();
+	private HibernateMappingClients services = new HibernateMappingClients();
 	
 	@RequestMapping( value = "/clients")
 	public String getClients(ModelMap model){
@@ -74,7 +74,6 @@ public class ClientsController {
 	
 	@RequestMapping( value = "/clients/client/update/", method = RequestMethod.POST)
 	public String addClient(@ModelAttribute("client") Client client, ModelMap model){
-		System.out.println("--------------------"+client.getName());
 		services.updateClient(client);
 		return "redirect:/garage/clients/client/"+client.getId();
 	}

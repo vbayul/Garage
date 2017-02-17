@@ -13,9 +13,10 @@
 			<tr>
 				<td>${car.id}</td>
 				<td>${car.name}</td>
-				<td><a href="/garage/garage/cars/car/${car.id}"></a></td>
+				<td><a href="/garage/garage/cars/car/${car.id}">Edit</a></td>
 			</tr>
 		</c:forEach>
 	</table>
+	<a href="/garage/garage/cars/car/new">New</a>
 </body>
 </html>
