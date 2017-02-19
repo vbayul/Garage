@@ -98,4 +98,20 @@ public class HibernateMappingClients {
 		
 		session.getTransaction().commit();
 	}
+	
+	public List<Client> getClientsWithCar(){
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		
+		@SuppressWarnings("unchecked")
+		List<Client> clients = session.createSQLQuery("SELECT `clients`.`idclients`," 
+				+" `clients`.`nameclients`,`clients`.`phoneclients`"
+				+" FROM garage.clients join garage.cars " 
+				+" ON garage.clients.idclients = garage.cars.idclients "
+				+" GROUP BY garage.clients.idclients;").addEntity(Client.class).list();
+		
+		session.getTransaction().commit();
+		return clients;
+	}
+	
 }

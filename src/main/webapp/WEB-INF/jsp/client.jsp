@@ -12,11 +12,11 @@
 		<form:input type="hidden" path="id" id="client.id"/>
         <table>
             <tr>
-                <td><label for="name">Name: </label> </td>
+                <td><label>Name: </label> </td>
                 <td><form:input path="name" id="client.name"/></td>
             </tr>
             <tr>
-                <td><label for="phone">Phone: </label> </td>
+                <td><label>Phone: </label> </td>
                 <td><form:input path="phone" id="client.phone"/></td>
             </tr>
             <tr>

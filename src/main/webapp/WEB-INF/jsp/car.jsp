@@ -11,24 +11,34 @@
 <body>
 	<form:form method="POST" modelAttribute="car" action="/garage/garage/cars/car/${operation}/">
 		<form:input type="hidden" path="id" id="car.id"/>
-		<form:label path="name">Name: </form:label>
-		<form:input path="name" id="car.name"/>
+		<table>
+			<tr>
+				<td>		
+					<form:label path="name">Name: </form:label>
+					<form:input path="name" id="car.name"/>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<form:label path="yearcars">Years: </form:label>
+					<form:input path="yearcars" id="car.yearcars"/>
+				</td>
+			</tr>
+		</table>
 		<c:if test="${operation eq 'add' }">
 			<form:input type="hidden" path="idclients" id="car.idclients" value="0"/>
 		</c:if>
 		<c:if test="${operation eq 'update' }">
 			<form:input type="hidden" path="idclients" id="car.idclients"/>
 		</c:if>
-
-		<form:label path="yearcars"></form:label>
-		<form:input path="yearcars" id="car.yearcars"/>
-			<c:if test="${operation eq 'update'}">
-	        	<input type="submit" value="Update"/>
-	        </c:if>
-	        <c:if test="${operation eq 'add'}">
-	        	<input type="submit" value="Add"/>
-	        </c:if>
+	
+		<c:if test="${operation eq 'update'}">
+		   	<input type="submit" value="Update"/>
+		</c:if>
+		<c:if test="${operation eq 'add'}">
+			<input type="submit" value="Add"/>
+		</c:if>
+		<input type="button" name="Back" value="Back" onClick="window.location='/garage/garage/cars';" />
 	</form:form>
-	         	<input type="button" name="Back" value="Back" onClick="window.location='/garage/garage/cars';" />
 </body>
 </html>

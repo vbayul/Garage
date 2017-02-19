@@ -22,14 +22,29 @@ public class HibernateMappingTickets {
 		
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		
-		session.beginTransaction();
-		
+		session.beginTransaction();	
 		Ticket ticket = (Ticket) session.createQuery("from Ticket where id = :idTiket")
 				.setParameter("idTiket", idTicket).uniqueResult();
-		
 		session.getTransaction().commit();
 		
 		return ticket;
+	}
+	
+	public void updateTicket(Ticket ticket){
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		
+		session.beginTransaction();
+		session.update(ticket);
+		session.getTransaction().commit();		
+	}
+	
+	public int saveTicket(Ticket ticket){
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		
+		session.beginTransaction();
+		int id = (Integer) session.save(ticket);
+		session.getTransaction().commit();		
+		return id;
 	}
 
 }

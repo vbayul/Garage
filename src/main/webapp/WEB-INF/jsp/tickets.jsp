@@ -18,5 +18,7 @@
 			</tr>
 		</c:forEach>
 	</table>
+	<a href="/garage/garage/tickets/ticket/clients">New</a>
+	<a href="/garage">Back</a>
 </body>
 </html>

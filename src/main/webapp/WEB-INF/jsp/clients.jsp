@@ -18,5 +18,6 @@
 		</c:forEach>
 	</table>
 	<a href="/garage/garage/clients/client/new">New</a>
+	<a href="/garage">Back</a>
 </body>
 </html>

@@ -3,6 +3,7 @@ package org.garage.jpa;
 import org.garage.model.Car;
 import org.garage.model.Client;
 import org.garage.model.Ticket;
+import org.garage.model.Trouble;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.AnnotationConfiguration;
 
@@ -21,6 +22,7 @@ public class HibernateUtil {
 					.addAnnotatedClass(Client.class)
 					.addAnnotatedClass(Car.class)
 					.addAnnotatedClass(Ticket.class)
+					.addAnnotatedClass(Trouble.class)
 					.buildSessionFactory();
 		}catch (Throwable ex) {
 			System.err.println("Initial SessionFactory creation failed." + ex);

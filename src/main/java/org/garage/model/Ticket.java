@@ -15,15 +15,22 @@ public class Ticket {
 	@Id
 	@GeneratedValue
 	@Column(name = "idtickets")
-	public int id;
+	private int id;
 	
 	@ManyToOne
 	@JoinColumn(name = "idcars")
-	public Car car;
+	private Car car;
 	
 	@ManyToOne
 	@JoinColumn(name = "idclients")
-	public Client client;
+	private Client client;
+	
+	@ManyToOne
+	@JoinColumn(name = "idtroubles")
+	private Trouble trouble;
+	
+	@Column(name = "commenttikets")
+	private String comment;
 
 	public int getId() {
 		return id;
@@ -47,5 +54,21 @@ public class Ticket {
 
 	public void setClient(Client client) {
 		this.client = client;
+	}
+
+	public Trouble getTrouble() {
+		return trouble;
+	}
+
+	public void setTrouble(Trouble trouble) {
+		this.trouble = trouble;
+	}
+
+	public String getComment() {
+		return comment;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
 	}
 }
